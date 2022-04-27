@@ -2,7 +2,7 @@ import csv
 import numpy as np
 import matplotlib.pyplot as plt
 
-import project1 as p1
+import sentiment_analysis as sa
 import sys
 
 if sys.version_info[0] < 3:
@@ -138,28 +138,28 @@ def tune(train_fn, param_vals, train_feats, train_labels, val_feats, val_labels)
     for i, val in enumerate(param_vals):
         theta, theta_0 = train_fn(train_feats, train_labels, val)
 
-        train_preds = p1.classify(train_feats, theta, theta_0)
-        train_accs[i] = p1.accuracy(train_preds, train_labels)
+        train_preds = sa.classify(train_feats, theta, theta_0)
+        train_accs[i] = sa.accuracy(train_preds, train_labels)
 
-        val_preds = p1.classify(val_feats, theta, theta_0)
-        val_accs[i] = p1.accuracy(val_preds, val_labels)
+        val_preds = sa.classify(val_feats, theta, theta_0)
+        val_accs[i] = sa.accuracy(val_preds, val_labels)
 
     return train_accs, val_accs
 
 def tune_perceptron(*args):
-    return tune(p1.perceptron, *args)
+    return tune(sa.perceptron, *args)
 
 def tune_avg_perceptron(*args):
-    return tune(p1.average_perceptron, *args)
+    return tune(sa.average_perceptron, *args)
 
 def tune_pegasos_T(best_L, *args):
     def train_fn(features, labels, T):
-        return p1.pegasos(features, labels, T, best_L)
+        return sa.pegasos(features, labels, T, best_L)
     return tune(train_fn, *args)
 
 def tune_pegasos_L(best_T, *args):
     def train_fn(features, labels, L):
-        return p1.pegasos(features, labels, best_T, L)
+        return sa.pegasos(features, labels, best_T, L)
     return tune(train_fn, *args)
 
 def most_explanatory_word(theta, wordlist):
