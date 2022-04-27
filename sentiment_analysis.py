@@ -103,11 +103,6 @@ def perceptron(feature_matrix, labels, T):
     iterations through the data set, there is no need to worry about
     stopping early.
 
-    NOTE: Please use the previously implemented functions when applicable.
-    Do not copy paste code from previous parts.
-
-    NOTE: Iterate the data matrix by the orders returned by get_order(feature_matrix.shape[0])
-
     Args:
         feature_matrix -  A numpy matrix describing the given data. Each row
             represents a single data point.
@@ -141,12 +136,6 @@ def average_perceptron(feature_matrix, labels, T):
     iterations through the data set, there is no need to worry about
     stopping early.
 
-    NOTE: Please use the previously implemented functions when applicable.
-    Do not copy paste code from previous parts.
-
-    NOTE: Iterate the data matrix by the orders returned by get_order(feature_matrix.shape[0])
-
-
     Args:
         feature_matrix -  A numpy matrix describing the given data. Each row
             represents a single data point.
@@ -161,8 +150,6 @@ def average_perceptron(feature_matrix, labels, T):
     number with the value of the average theta_0, the offset classification
     parameter, found after T iterations through the feature matrix.
 
-    Hint: It is difficult to keep a running average; however, it is simple to
-    find a sum and divide.
     """
     current_theta = np.zeros(feature_matrix.shape[1])
     current_theta_0 = 0.0
@@ -171,7 +158,6 @@ def average_perceptron(feature_matrix, labels, T):
 
     for t in range(T):
         for i in get_order(feature_matrix.shape[0]):
-            # Your code here
             current_theta, current_theta_0 = perceptron_single_step_update(feature_matrix[i, :],
                                                                            labels[i],
                                                                            current_theta,
@@ -223,14 +209,7 @@ def pegasos(feature_matrix, labels, T, L):
     Runs the Pegasos algorithm on a given set of data. Runs T
     iterations through the data set, there is no need to worry about
     stopping early.
-
-    For each update, set learning rate = 1/sqrt(t),
-    where t is a counter for the number of updates performed so far (between 1
-    and nT inclusive).
-
-    NOTE: Please use the previously implemented functions when applicable.
-    Do not copy paste code from previous parts.
-
+    
     Args:
         feature_matrix - A numpy matrix describing the given data. Each row
             represents a single data point.
@@ -341,7 +320,6 @@ def bag_of_words(texts):
     Inputs a list of string reviews
     Returns a dictionary of unique unigrams occurring over the input
 
-    Feel free to change this code as guided by Problem 9
     """
     stopwords = np.loadtxt('stopwords.txt', delimiter='\n', dtype=str, unpack=True)
 
@@ -362,7 +340,6 @@ def extract_bow_feature_vectors(reviews, dictionary):
     The returned matrix is of shape (n, m), where n is the number of reviews
     and m the total number of entries in the dictionary.
 
-    Feel free to change this code as guided by Problem 9
     """
 
     num_reviews = len(reviews)
